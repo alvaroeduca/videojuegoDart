@@ -11,10 +11,20 @@ void main(List<String> args) {
 void start() {
   //Empieza el programa y muestra una listo de opciones a el usuario
   List<Map> videogames = createGames();
+
+  print('''Este es un programa para buscar videojuegos
+  ¿Que deseas hacer?
+  1-Mostrar todos lod videojuegos
+  Ni idea- salir del programa''');
+
   switch (int.parse(stdin.readLineSync().toString())) {
     case 1:
       showAll(videogames);
       break;
+    case 2:
+      //searchBy(videogames);
+      break;
+
     case 2:
       //searchBy(videogames);
       break;
@@ -28,7 +38,7 @@ void showAll(List videogames) {
 
 void searchBy(List<Map> videogames, String key) {
   //Búsqueda por cada uno de los atributos
-  //videogames.where();
+  videogames.where();
 }
 
 List<Map> createGames() {
