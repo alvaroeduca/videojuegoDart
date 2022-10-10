@@ -20,6 +20,7 @@ void start() {
 
   do {
     print('''
+
   0- Salir
   1- Mostrar todos los videojuegos
   2- Mostrar juegos por nombre
@@ -27,7 +28,8 @@ void start() {
   4- Mostrar juegos por saga
   5- Mostrar juegos por lanzamiento
   6- Mostrar juegos por categoria
-  7- Mostrar juegos por año''');
+  7- Mostrar juegos por año
+  ''');
 
     value = int.parse(stdin.readLineSync().toString());
 
@@ -51,7 +53,7 @@ void start() {
         searchBy(videogames, "Category");
         break;
       case 7:
-        searchBy(videogames, "Age");
+        searchBy(videogames, "Age Clasification");
         break;
       default:
         if (value == 0) {
@@ -72,12 +74,23 @@ void showAll(List videogames) {
 
 void searchBy(List<Map> videogames, String key) {
   //Búsqueda por cada uno de los atributos
+  print("\nIntroduzca el valor de busqueda:");
 
-  print("Juegos encontrados por $key");
+  dynamic search;
 
-  videogames
-      .where((map) => (map[key]))
-      .forEach((mapValue) => ({print('''$mapValue''')}));
+  if(key == "Release" || key == "Age Clasification"){
+    search = int.parse(stdin.readLineSync().toString());
+     videogames
+      .where((map) => map[key] == search)
+      .forEach((map) => ({print("\n$map \n")}));
+  }else{
+    search = stdin.readLineSync().toString().toLowerCase();
+     videogames
+      .where((map) => map[key].toString().toLowerCase().contains(search))
+      .forEach((map) => ({print("\n$map \n")}));
+  }
+
+  print("Busqueda realizada con exito\n");
 }
 
 List<Map> createGames() {
