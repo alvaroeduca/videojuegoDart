@@ -1,6 +1,6 @@
 import 'videogame.dart';
 
-getGames() {
+List<Videogame> getGames() {
   return [
     Videogame(
         "Super Mario 64",

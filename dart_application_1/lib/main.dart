@@ -14,35 +14,53 @@ void start() {
   bool exit = false;
 
   print('''Este es un programa para buscar videojuegos
-  ¿Que deseas hacer?
-  1-Mostrar todos los videojuegos
-  Ni idea- salir del programa''');
+  ¿Que deseas hacer?''');
+
+  int value = 0;
 
   do {
-    switch (int.parse(stdin.readLineSync().toString())) {
+    print('''
+  0- Salir
+  1- Mostrar todos los videojuegos
+  2- Mostrar juegos por nombre
+  3- Mostrar juegos por compañia
+  4- Mostrar juegos por saga
+  5- Mostrar juegos por lanzamiento
+  6- Mostrar juegos por categoria
+  7- Mostrar juegos por año''');
+
+    value = int.parse(stdin.readLineSync().toString());
+
+    switch (value) {
       case 1:
         showAll(videogames);
         break;
       case 2:
-        searchBy(videogames, "name");
+        searchBy(videogames, "Name");
         break;
       case 3:
-        searchBy(videogames, "company");
+        searchBy(videogames, "Company");
         break;
       case 4:
-        searchBy(videogames, "saga");
+        searchBy(videogames, "Saga");
         break;
       case 5:
-        searchBy(videogames, "release");
+        searchBy(videogames, "Release");
         break;
       case 6:
-        searchBy(videogames, "category");
+        searchBy(videogames, "Category");
         break;
       case 7:
-        searchBy(videogames, "age");
+        searchBy(videogames, "Age");
         break;
       default:
-        exit = true;
+        if (value == 0) {
+          exit = true;
+
+          print("Salimos del programa");
+        } else if (value < 0 || value > 7) {
+          print("La opcion elegida esta fuera del rango, intenta de nuevo");
+        }
         break;
     }
   } while (exit == false);
@@ -54,14 +72,19 @@ void showAll(List videogames) {
 
 void searchBy(List<Map> videogames, String key) {
   //Búsqueda por cada uno de los atributos
-  videogames.where();
+
+  print("Juegos encontrados por $key");
+
+  videogames
+      .where((map) => (map[key]))
+      .forEach((mapValue) => ({print('''$mapValue''')}));
 }
 
 List<Map> createGames() {
   //Método para cargar los videojuegos en la coleccion inicial
   List<Videogame> videogames = getGames();
   List<Map> aux = [];
-  for (var v in videogames) {
+  for (Videogame v in videogames) {
     aux.add({
       "Name": v.name,
       "Company": v.company,
