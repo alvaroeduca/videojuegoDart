@@ -23,12 +23,12 @@ void start() {
 
   0- Salir
   1- Mostrar todos los videojuegos
-  2- Mostrar juegos por nombre
-  3- Mostrar juegos por compañia
-  4- Mostrar juegos por saga
-  5- Mostrar juegos por lanzamiento
-  6- Mostrar juegos por categoria
-  7- Mostrar juegos por año
+  2- Buscar juegos por nombre
+  3- Buscar juegos por compañia
+  4- Buscar juegos por saga
+  5- Buscar juegos por año de lanzamiento
+  6- Buscar juegos por categoria
+  7- Buscar juegos por clasificación de edad
   ''');
 
     value = int.parse(stdin.readLineSync().toString());
@@ -78,16 +78,16 @@ void searchBy(List<Map> videogames, String key) {
 
   dynamic search;
 
-  if(key == "Release" || key == "Age Clasification"){
+  if (key == "Release" || key == "Age Clasification") {
     search = int.parse(stdin.readLineSync().toString());
-     videogames
-      .where((map) => map[key] == search)
-      .forEach((map) => ({print("\n$map \n")}));
-  }else{
+    videogames
+        .where((map) => map[key] == search)
+        .forEach((map) => ({print("\n$map \n")}));
+  } else {
     search = stdin.readLineSync().toString().toLowerCase();
-     videogames
-      .where((map) => map[key].toString().toLowerCase().contains(search))
-      .forEach((map) => ({print("\n$map \n")}));
+    videogames
+        .where((map) => map[key].toString().toLowerCase().contains(search))
+        .forEach((map) => ({print("\n$map \n")}));
   }
 
   print("Busqueda realizada con exito\n");
